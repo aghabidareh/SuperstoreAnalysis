@@ -72,3 +72,16 @@ sidebar = html.Div(
     ],
     style=SIDEBAR_STYLE,
 )
+
+# Define main content
+content = html.Div(
+    [
+        html.H1("Interactive Superstore Analytics", style={"color": "#00ffcc", "text-align": "center"}),
+        dcc.Graph(id="sales-bar"),
+        dcc.Graph(id="profit-scatter"),
+        dcc.Graph(id="sales-trend"),
+        dcc.Graph(id="category-pie"),
+        dcc.Graph(id="correlation-heatmap"),
+    ],
+    style=CONTENT_STYLE,
+)
