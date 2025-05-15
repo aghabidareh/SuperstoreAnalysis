@@ -90,3 +90,21 @@ content = html.Div(
 app.layout = html.Div([sidebar, content])
 
 
+# callback to update plots
+@app.callback(
+    [
+        Output("sales-bar", "figure"),
+        Output("profit-scatter", "figure"),
+        Output("sales-trend", "figure"),
+        Output("category-pie", "figure"),
+        Output("correlation-heatmap", "figure"),
+    ],
+    [
+        Input("region-dropdown", "value"),
+        Input("category-dropdown", "value"),
+        Input("year-dropdown", "value"),
+        Input("discount-slider", "value"),
+    ],
+)
+def update_graphs():
+    pass
