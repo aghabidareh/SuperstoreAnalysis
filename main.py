@@ -112,4 +112,102 @@ def update_graphs(
         selected_years,
         discount_range
 ):
-    pass
+    filtered_df = df.copy()
+    if selected_regions:
+        filtered_df = filtered_df[filtered_df["Region"].isin(selected_regions)]
+    if selected_categories:
+        filtered_df = filtered_df[filtered_df["Category"].isin(selected_categories)]
+    if selected_years:
+        filtered_df = filtered_df[filtered_df["Year"].isin(selected_years)]
+    filtered_df = filtered_df[
+        (filtered_df["Discount"] >= discount_range[0]) & (filtered_df["Discount"] <= discount_range[1])
+        ]
+
+    sales_by_category = filtered_df.groupby("Category")["Sales"].sum().reset_index()
+    fig_bar = px.bar(
+        sales_by_category,
+        x="Category",
+        y="Sales",
+        title="Total Sales by Category",
+        color="Category",
+        color_discrete_sequence=px.colors.sequential.Plasma,
+    )
+    fig_bar.update_layout(
+        plot_bgcolor="#1a1a1a",
+        paper_bgcolor="#1a1a1a",
+        font_color="#ffffff",
+        title_font_color="#00ffcc",
+        showlegend=False,
+    )
+
+    fig_scatter = px.scatter(
+        filtered_df,
+        x="Sales",
+        y="Profit",
+        color="Discount",
+        size="Quantity",
+        hover_data=["Product Name", "Region"],
+        title="Sales vs Profit (Colored by Discount)",
+        color_continuous_scale=px.colors.sequential.Viridis,
+    )
+    fig_scatter.update_layout(
+        plot_bgcolor="#1a1a1a",
+        paper_bgcolor="#1a1a1a",
+        font_color="#ffffff",
+        title_font_color="#00ffcc",
+    )
+
+    sales_trend = filtered_df.groupby("Order Date")["Sales"].sum().resample("M").sum().reset_index()
+    fig_trend = px.line(
+        sales_trend,
+        x="Order Date",
+        y="Sales",
+        title="Sales Trend Over Time",
+        markers=True,
+    )
+    fig_trend.update_traces(line_color="#00ffcc")
+    fig_trend.update_layout(
+        plot_bgcolor="#1a1a1a",
+        paper_bgcolor="#1a1a1a",
+        font_color="#ffffff",
+        title_font_color="#00ffcc",
+    )
+
+    category_share = filtered_df.groupby("Category")["Sales"].sum().reset_index()
+    fig_pie = px.pie(
+        category_share,
+        names="Category",
+        values="Sales",
+        title="Sales Share by Category",
+        color_discrete_sequence=px.colors.sequential.Plasma,
+    )
+    fig_pie.update_layout(
+        plot_bgcolor="#1a1a1a",
+        paper_bgcolor="#1a1a1a",
+        font_color="#ffffff",
+        title_font_color="#00ffcc",
+    )
+
+    numeric_cols = ["Sales", "Quantity", "Discount", "Profit"]
+    corr_matrix = filtered_df[numeric_cols].corr()
+    fig_heatmap = go.Figure(
+        data=go.Heatmap(
+            z=corr_matrix.values,
+            x=corr_matrix.columns,
+            y=corr_matrix.columns,
+            colorscale="RdBu",
+            showscale=True,
+            text=corr_matrix.values.round(2),
+            texttemplate="%{text}",
+            textfont={"size": 12, "color": "#ffffff"},
+        )
+    )
+    fig_heatmap.update_layout(
+        title="Correlation Heatmap",
+        plot_bgcolor="#1a1a1a",
+        paper_bgcolor="#1a1a1a",
+        font_color="#ffffff",
+        title_font_color="#00ffcc",
+    )
+
+    return fig_bar, fig_scatter, fig_trend, fig_pie, fig_heatmap
