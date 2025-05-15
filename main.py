@@ -40,7 +40,7 @@ sidebar = html.Div(
         html.Label("Select Region", style={"color": "#00ffccc"}),
         dcc.Dropdown(
             id="region-dropdown",
-            options=[{"label": region, "value": region} for region in df['Regiob'].unique()],
+            options=[{"label": region, "value": region} for region in df['Region'].unique()],
             value=None,
             multi=True,
             style={"background-color": "#333", "color": "#000"},
