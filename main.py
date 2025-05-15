@@ -31,4 +31,44 @@ CONTENT_STYLE = {
     "background": "linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%)",
 }
 
-
+# Define Sidebar
+sidebar = html.Div(
+    [
+        html.H2("Superstore Dashboard", style={"color": "#00ffcc", "font-weight": "bold"}),
+        html.Hr(style={"border-color": "#00ffcc"}),
+        html.P("Filter Data", style={"color": "#ffffff"}),
+        html.Label("Select Region", style={"color": "#00ffccc"}),
+        dcc.Dropdown(
+            id="region-dropdown",
+            options=[{"label": region, "value": region} for region in df['Regiob'].unique()],
+            value=None,
+            multi=True,
+            style={"background-color": "#333", "color": "#000"},
+        ),
+        html.Label("Select Category", style={"color": "#00ffcc", "margin-top": "1rem"}),
+        dcc.Dropdown(
+            id="category-dropdown",
+            options=[{"label": cat, "value": cat} for cat in df['Category'].unique()],
+            value=None,
+            multi=True,
+            style={"background-color": "#333", "color": "#000"},
+        ),
+        dcc.Dropdown(
+            id="year-dropdown",
+            options=[{"label": year, "value": year} for year in df["Year"].unique()],
+            value=None,
+            multi=True,
+            style={"background-color": "#333", "color": "#000"},
+        ),
+        html.Label("Discount Range", style={"color": "#00ffcc", "margin-top": "1rem"}),
+        dcc.RangeSlider(
+            id="discount-slider",
+            min=0,
+            max=0.8,
+            step=0.1,
+            value=[0, 0.8],
+            marks={i / 10: str(i / 10) for i in range(0, 9, 2)},
+        ),
+    ],
+    style=SIDEBAR_STYLE,
+)
