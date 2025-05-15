@@ -212,5 +212,6 @@ def update_graphs(
 
     return fig_bar, fig_scatter, fig_trend, fig_pie, fig_heatmap
 
+
 if __name__ == "__main__":
     app.run_server(debug=True)
