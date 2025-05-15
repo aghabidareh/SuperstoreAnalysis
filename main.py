@@ -9,3 +9,7 @@ df = pd.read_csv('superstore.csv')
 df['Order Date'] = pd.to_datetime(df['Order Date'])
 df['Year'] = df['Order Date'].dt.year
 
+# Dash with Dark Theme
+app = Dash(__name__, external_stylesheets=[dbc.themes.LITERA])
+
+
