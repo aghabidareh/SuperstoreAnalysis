@@ -24,3 +24,11 @@ SIDEBAR_STYLE = {
     "box-shadow": "2px 0 5px rgba(0,0,0,0.5)"
 }
 
+CONTENT_STYLE = {
+    "margin-left": "18rem",
+    "margin-right": "2ren",
+    "padding": "2rem 1rem",
+    "background": "linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%)",
+}
+
+
