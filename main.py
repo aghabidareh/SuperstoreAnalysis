@@ -106,5 +106,10 @@ app.layout = html.Div([sidebar, content])
         Input("discount-slider", "value"),
     ],
 )
-def update_graphs():
+def update_graphs(
+        selected_regions,
+        selected_categories,
+        selected_years,
+        discount_range
+):
     pass
