@@ -5,7 +5,7 @@ from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 
 # Loading and preparing data
-df = pd.read_csv('superstore.csv')
+df = pd.read_csv('superstore.csv', encoding="ISO-8859-1")
 df['Order Date'] = pd.to_datetime(df['Order Date'])
 df['Year'] = df['Order Date'].dt.year
 
