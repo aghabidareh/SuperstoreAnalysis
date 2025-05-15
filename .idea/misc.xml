@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="Black">
+    <option name="sdkName" value="D:\applications\anaconda" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="D:\applications\anaconda" project-jdk-type="Python SDK" />
 </project>
