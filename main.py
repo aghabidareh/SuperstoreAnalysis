@@ -85,3 +85,8 @@ content = html.Div(
     ],
     style=CONTENT_STYLE,
 )
+
+# Main layout
+app.layout = html.Div([sidebar, content])
+
+
