@@ -54,8 +54,8 @@ pip install pandas plotly dash dash-bootstrap-components numpy matplotlib seabor
 
 1. **Clone the repo**:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone git@github.com:aghabidareh/SuperstoreAnalysis.git
+   cd SuperstoreAnalysis
    ```
 
 2. **Prepare the dataset**: Place `superstore.csv` in the same directory as `main.py` and `main.ipynb`.
